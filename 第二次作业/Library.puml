@@ -1,0 +1,34 @@
+@startuml
+class User {
+    - id: int
+    - name: string
+    - contactInfo: string
+    + borrowBook(book: Book): void
+    + returnBook(book: Book): void
+}
+
+class Book {
+    - id: int
+    - title: string
+    - author: string
+    - isBorrowed: boolean
+    + getTitle(): string
+    + getAuthor(): string
+    + isBorrowed(): boolean
+}
+
+class BorrowingRecord {
+    - id: int
+    - user: User
+    - book: Book
+    - borrowDate: date
+    - returnDate: date
+    + getBorrowDate(): date
+    + getReturnDate(): date
+}
+
+User "1" -- "*" BorrowingRecord : has
+Book "1" -- "*" BorrowingRecord : has
+User "1" -- "*" Book : borrows
+
+@enduml
